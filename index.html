@@ -3,152 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday, Honey!</title>
+  <title>Happy Birthday, My Love!</title>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@400;600&display=swap');
-  
     body {
       background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
       font-family: 'Open Sans', sans-serif;
       text-align: center;
       padding: 40px 20px;
       color: #333;
-      overflow: hidden;
+      overflow-x: hidden;
     }
-  
+
     h1 {
       color: #d6336c;
       font-family: 'Great Vibes', cursive;
       font-size: 3em;
-      animation: fadeIn 2s ease-in-out;
       margin-bottom: 20px;
+      animation: fadeIn 2s ease-in-out;
     }
-  
-    #slideshow {
+
+    img {
       width: 90%;
       max-width: 340px;
       height: auto;
       border-radius: 20px;
-      box-shadow: 0 0 20px #e75480;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
       margin-top: 20px;
-      animation: glow 3s ease-in-out infinite alternate;
+      animation: fadeIn 3s ease-in-out;
     }
-  
+
     .note {
       margin-top: 25px;
-      font-size: 1.1em;
+      font-size: 1.2em;
       color: #444;
       font-weight: 500;
-      animation: fadeIn 3s ease-in;
-      line-height: 1.5;
+      animation: fadeIn 4s ease-in-out;
+      line-height: 1.6;
       padding: 0 10px;
     }
-  
-    #reveal-btn {
-      margin-top: 35px;
-      padding: 12px 25px;
-      font-size: 1em;
-      background-color: #e75480;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 0 10px #e75480;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      animation: fadeIn 4s ease-in;
-    }
-  
-    #reveal-btn:hover {
-      background-color: #d6336c;
-      transform: scale(1.05);
-    }
-  
-    #secret {
-      display: none;
-      margin-top: 30px;
-      font-size: 1.4em;
-      color: #d6336c;
-      font-style: italic;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid #d6336c;
-      animation: typing 4s steps(60, end), blink 0.7s step-end infinite alternate;
-    }
-  
+
     audio {
       opacity: 0;
       animation: fadeInAudio 4s forwards;
     }
-  
-    /* Animations */
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
-  
-    @keyframes glow {
-      from { box-shadow: 0 0 10px #e75480; }
-      to { box-shadow: 0 0 25px #d6336c; }
-    }
-  
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-  
-    @keyframes blink {
-      from, to { border-color: transparent; }
-      50% { border-color: #d6336c; }
-    }
-  
+
     @keyframes fadeInAudio {
       to { opacity: 1; }
     }
-  
-    .heart {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      background: url('https://i.imgur.com/QpQ2a0j.png') no-repeat center;
-      background-size: contain;
-      animation: floatUp 10s infinite ease-in;
-      opacity: 0.5;
-      z-index: 0;
-    }
-  
-    @keyframes floatUp {
-      0% {
-        transform: translateY(100vh) scale(0.5) rotate(0deg);
-        opacity: 0;
-      }
-      50% {
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(-10vh) scale(1.2) rotate(360deg);
-        opacity: 0;
-      }
-    }
-  
-    /* Responsive tweaks */
+
     @media screen and (max-width: 600px) {
       h1 {
         font-size: 2.2em;
       }
-  
+
       .note {
         font-size: 1em;
       }
-  
-      #secret {
-        font-size: 1.2em;
-      }
     }
-  </style>  
+  </style>
 </head>
 <body>
 
@@ -161,57 +82,12 @@
   <!-- Title -->
   <h1>🎉 Happy Birthday, Babe! 🎉</h1>
 
-  <!-- Slideshow -->
-  <img id="slideshow" src="photo1.jpg" alt="Us together" />
+  <!-- One beautiful photo -->
+  <img src="photo1.jpg" alt="Us together" />
 
   <!-- Message -->
   <p class="note">
-    Cảm ơn em đã xuất hiện trong cuộc đời anh — xinh đẹp, lầy lội, và đáng yêu. <br>
-    Mỗi ngày bên em đều có drama, có tiếng cười, có đồ ăn ngon… và anh không muốn đổi nó với bất cứ điều gì. 😘
-  </p>
-
-  <!-- Button -->
-  <button id="reveal-btn">Bấm dô đây 💌</button>
-
-  <!-- Secret Message -->
-  <p id="secret">Tuổi mới phải luôn xinh, luôn vui, và tiếp tục làm người yêu anh thiệt lâu nha. ❤️</p>
-
-  <!-- JavaScript -->
-  <script>
-    // Slideshow logic
-    const images = [
-      "photo1.jpg", "photo2.jpg", "photo3.jpg",
-      "photo4.jpg", "photo5.jpg", "photo6.jpg", "photo7.jpg"
-    ];
-    let index = 0;
-    const imgElement = document.getElementById("slideshow");
-
-    setInterval(() => {
-      index = (index + 1) % images.length;
-      imgElement.src = images[index];
-    }, 3000);
-
-    // Reveal button
-    const button = document.getElementById("reveal-btn");
-    const secret = document.getElementById("secret");
-
-    button.addEventListener("click", () => {
-      secret.style.display = "inline-block";
-      button.style.display = "none";
-    });
-
-    // Floating hearts
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (6 + Math.random() * 5) + "s";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 10000);
-    }
-
-    setInterval(createHeart, 800);
-  </script>
-
-</body>
-</html>
+    Cảm ơn em đã xuất hiện trong cuộc đời anh — xinh đẹp, lầy lội, và đáng yêu.  
+    Mỗi ngày bên em đều có drama, có tiếng cười, có đồ ăn ngon… và anh không muốn đổi nó với bất cứ điều gì. 😘  
+    <br><br>
+    Tuổi mới phải luôn xinh, luôn vui, và tiếp tục làm người yêu anh thiệt lâu nhá.
