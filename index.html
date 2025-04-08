@@ -26,14 +26,22 @@
       animation: fadeIn 2s ease-in-out;
     }
 
-    img {
-      width: 90%;
-      max-width: 340px;
-      height: auto;
-      border-radius: 20px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    .photo-frame {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
       margin: 20px 0;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      max-width: 100px;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
       animation: fadeIn 3s ease-in-out;
+      object-fit: cover;
     }
 
     .note {
@@ -111,6 +119,10 @@
       .note {
         font-size: 1em;
       }
+
+      .photo-frame img {
+        max-width: 80px;
+      }
     }
   </style>
 </head>
@@ -128,10 +140,12 @@
   <!-- Title -->
   <h1>🎉&nbsp;Happy Birthday, Honey!&nbsp;🎉</h1>
 
-  <!-- Photos -->
-  <img src="photo1.jpg" alt="A sweet photo of us smiling together." />
-  <img src="photo2.jpg" alt="Another happy memory with us." />
-  <img src="photo3.jpg" alt="One of my favorite photos of you." />
+  <!-- 3 Photos in the same frame -->
+  <div class="photo-frame">
+    <img src="photo1.jpg" alt="Us together 1" />
+    <img src="photo2.jpg" alt="Us together 2" />
+    <img src="photo3.jpg" alt="Us together 3" />
+  </div>
 
   <!-- Message -->
   <p class="note" lang="vi">
@@ -146,7 +160,7 @@
 
   <!-- Hidden message -->
   <p class="hidden-message" id="surprise">
-    Anh biết có những lúc anh mang cái tôi cao và chọc giận em...  
+    Anh biết có những lúc anh mang cái tôi cao và em giận...  
     Nhưng anh thương em nhiều lắm, và anh luôn muốn cố gắng để xứng đáng với em hơn từng ngày.  
     <br><br>
     Cảm ơn em đã kiên nhẫn với anh và đã yêu anh nhiều như vậy. Anh yêu em rất nhiều. 🥺❤️
