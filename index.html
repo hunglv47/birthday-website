@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday, My Love!</title>
+  <title>Thẹc Quyên 23 Tủi! 😘</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Open+Sans:wght@400;600&family=Pacifico&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 
   <style>
     body {
       background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
-      font-family: 'Open Sans', sans-serif;
+      font-family: 'Lora', serif;
       text-align: center;
       padding: 40px 20px;
       color: #333;
@@ -21,29 +21,38 @@
     h1 {
       color: #d6336c;
       font-family: 'Great Vibes', cursive;
-      font-size: 3em;
+      font-size: 3.5em;
       margin-bottom: 20px;
       animation: fadeIn 2s ease-in-out;
     }
 
-    img {
-      width: 90%;
-      max-width: 340px;
-      height: auto;
-      border-radius: 20px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    .photo-frame {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
       margin: 20px 0;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      max-width: 100px;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
       animation: fadeIn 3s ease-in-out;
+      object-fit: cover;
     }
 
     .note {
       margin-top: 25px;
-      font-size: 1.2em;
+      font-size: 1.4em;
       color: #444;
       font-weight: 500;
       animation: fadeIn 4s ease-in-out;
-      line-height: 1.6;
+      line-height: 1.8;
       padding: 0 10px;
+      font-style: italic;
     }
 
     audio {
@@ -54,13 +63,14 @@
     button {
       margin-top: 30px;
       padding: 12px 24px;
-      font-size: 1em;
+      font-size: 1.2em;
       background-color: #d6336c;
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       transition: background-color 0.3s, transform 0.3s;
+      font-family: 'Pacifico', cursive;
     }
 
     button:hover {
@@ -81,12 +91,14 @@
       opacity: 0;
       transform: scale(0.95);
       transition: opacity 1.5s ease, transform 0.5s ease;
-      font-size: 1.2em;
+      font-size: 1.4em;
       margin-top: 30px;
       color: #555;
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
+      line-height: 1.8;
+      font-style: italic;
     }
 
     .show {
@@ -103,6 +115,25 @@
       to { opacity: 1; }
     }
 
+    .floating-symbol {
+      position: fixed;
+      pointer-events: none;
+      font-size: 24px;
+      animation: floatUp 2s ease-out forwards;
+      z-index: 1000;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
     @media screen and (max-width: 600px) {
       h1 {
         font-size: 2.2em;
@@ -110,6 +141,10 @@
 
       .note {
         font-size: 1em;
+      }
+
+      .photo-frame img {
+        max-width: 80px;
       }
     }
   </style>
@@ -128,10 +163,12 @@
   <!-- Title -->
   <h1>🎉&nbsp;Happy Birthday, Honey!&nbsp;🎉</h1>
 
-  <!-- Photos -->
-  <img src="photo1.jpg" alt="A sweet photo of us smiling together." />
-  <img src="photo2.jpg" alt="Another happy memory with us." />
-  <img src="photo3.jpg" alt="One of my favorite photos of you." />
+  <!-- 3 Photos in the same frame -->
+  <div class="photo-frame">
+    <img src="photo1.jpg" alt="Us together 1" />
+    <img src="photo2.jpg" alt="Us together 2" />
+    <img src="photo3.jpg" alt="Us together 3" />
+  </div>
 
   <!-- Message -->
   <p class="note" lang="vi">
@@ -142,28 +179,74 @@
   </p>
 
   <!-- Surprise Button -->
-  <button onclick="revealMessage(this)">💌 Bấm dô đây 💌</button>
+  <button id="surpriseButton" onclick="revealMessage(this)">💌 Bấm dô đây 💌</button>
 
   <!-- Hidden message -->
   <p class="hidden-message" id="surprise">
-    Anh biết có những lúc anh mang cái tôi cao, khiến ta cãi nhau...  
+    Anh biết có những lúc anh mang cái tôi cao và em giận...  
     Nhưng anh thương em nhiều lắm, và anh luôn muốn cố gắng để xứng đáng với em hơn từng ngày.  
     <br><br>
     Cảm ơn em đã kiên nhẫn với anh và đã yêu anh nhiều như vậy. Anh yêu em rất nhiều. 🥺❤️
   </p>
 
   <script>
+    function createFloatingSymbols(type, count = 10) {
+      const symbols = type === 'music' 
+        ? ['🎵', '🎶', '🎼', '🎹', '🎸', '🎺', '🎻', '🥁', '🎷', '🪕']
+        : ['❤️', '💖', '💝', '💕', '💗', '💓', '💞', '💘', '💟', '💜'];
+      
+      for (let i = 0; i < count; i++) {
+        const symbol = document.createElement('div');
+        symbol.className = 'floating-symbol';
+        symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        
+        // Random position around the button
+        const button = type === 'music' ? document.getElementById('playButton') : document.getElementById('surpriseButton');
+        const rect = button.getBoundingClientRect();
+        const x = rect.left + Math.random() * rect.width;
+        const y = rect.top + Math.random() * rect.height;
+        
+        symbol.style.left = x + 'px';
+        symbol.style.top = y + 'px';
+        
+        document.body.appendChild(symbol);
+        
+        // Remove the symbol after animation
+        setTimeout(() => {
+          symbol.remove();
+        }, 2000);
+      }
+    }
+
     function playMusic() {
       const audio = document.getElementById('bg-music');
       const btn = document.getElementById('playButton');
-      audio.play();
+      
+      if (audio.paused) {
+        audio.play();
+        btn.textContent = '⏸️ Tắt nhạc';
+        createFloatingSymbols('music');
+      } else {
+        audio.pause();
+        btn.textContent = '▶️ Bật nhạc lên';
+      }
+      
       btn.classList.add('pulse');
       setTimeout(() => btn.classList.remove('pulse'), 800);
     }
 
     function revealMessage(button) {
       const message = document.getElementById('surprise');
-      message.classList.add('show');
+      
+      if (message.classList.contains('show')) {
+        message.classList.remove('show');
+        button.textContent = '💌 Bấm dô đây 💌';
+      } else {
+        message.classList.add('show');
+        button.textContent = '💌 😘 💌';
+        createFloatingSymbols('love');
+      }
+      
       button.classList.add('pulse');
       setTimeout(() => button.classList.remove('pulse'), 800);
     }
