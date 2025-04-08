@@ -32,7 +32,7 @@
       height: auto;
       border-radius: 20px;
       box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-      margin-top: 20px;
+      margin: 20px 0;
       animation: fadeIn 3s ease-in-out;
     }
 
@@ -49,6 +49,49 @@
     audio {
       opacity: 0;
       animation: fadeInAudio 4s forwards;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 1em;
+      background-color: #d6336c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    button:hover {
+      background-color: #bf2a5b;
+    }
+
+    .pulse {
+      animation: pulse 0.8s;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(214, 51, 108, 0.7); }
+      70% { transform: scale(1.1); box-shadow: 0 0 15px 10px rgba(214, 51, 108, 0); }
+      100% { transform: scale(1); }
+    }
+
+    .hidden-message {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 1.5s ease, transform 0.5s ease;
+      font-size: 1.2em;
+      margin-top: 30px;
+      color: #555;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .show {
+      opacity: 1;
+      transform: scale(1);
     }
 
     @keyframes fadeIn {
@@ -74,20 +117,57 @@
 <body>
 
   <!-- Music -->
-  <audio autoplay loop>
+  <audio id="bg-music" autoplay loop>
     <source src="2Much.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
-  <!-- Title -->
-  <h1>🎉 Happy Birthday, Honey! 🎉</h1>
+  <!-- Play music fallback button -->
+  <button id="playButton" onclick="playMusic()">▶️ Bật nhạc lên</button>
 
-  <!-- One beautiful photo -->
-  <img src="photo1.jpg" alt="Us together" />
+  <!-- Title -->
+  <h1>🎉&nbsp;Happy Birthday, Honey!&nbsp;🎉</h1>
+
+  <!-- Photos -->
+  <img src="photo1.jpg" alt="A sweet photo of us smiling together." />
+  <img src="photo2.jpg" alt="Another happy memory with us." />
+  <img src="photo3.jpg" alt="One of my favorite photos of you." />
 
   <!-- Message -->
-  <p class="note">
+  <p class="note" lang="vi">
     Cảm ơn em đã xuất hiện trong cuộc đời anh — xinh đẹp, lầy lội, và đáng yêu.  
     Mỗi ngày bên em đều có drama, có tiếng cười, có đồ ăn ngon… và anh không muốn đổi nó với bất cứ điều gì. 😘  
     <br><br>
-    Tuổi mới phải luôn xinh, luôn vui, và tiếp tục làm người yêu anh thiệt lâu nhá.
+    Tuổi mới phải luôn xinh, luôn vui, và tiếp tục làm người yêu anh thiệt lâu nha. ❤️
+  </p>
+
+  <!-- Surprise Button -->
+  <button onclick="revealMessage(this)">💌 Bấm dô đây 💌</button>
+
+  <!-- Hidden message -->
+  <p class="hidden-message" id="surprise">
+    Anh biết có những lúc anh mang cái tôi cao và chọc giận em...  
+    Nhưng anh thương em nhiều lắm, và anh luôn muốn cố gắng để xứng đáng với em hơn từng ngày.  
+    <br><br>
+    Cảm ơn em đã kiên nhẫn với anh và đã yêu anh nhiều như vậy. Anh yêu em rất nhiều. 🥺❤️
+  </p>
+
+  <script>
+    function playMusic() {
+      const audio = document.getElementById('bg-music');
+      const btn = document.getElementById('playButton');
+      audio.play();
+      btn.classList.add('pulse');
+      setTimeout(() => btn.classList.remove('pulse'), 800);
+    }
+
+    function revealMessage(button) {
+      const message = document.getElementById('surprise');
+      message.classList.add('show');
+      button.classList.add('pulse');
+      setTimeout(() => button.classList.remove('pulse'), 800);
+    }
+  </script>
+
+</body>
+</html>
